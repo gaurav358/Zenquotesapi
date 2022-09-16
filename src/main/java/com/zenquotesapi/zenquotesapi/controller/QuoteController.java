@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class QuoteController {
     @Autowired
     private Quotes quotes;
-
     @Autowired
     private QuoteByAggregate quoteByAggregate;
     @Autowired
@@ -33,33 +33,32 @@ public class QuoteController {
     @Autowired
     private Countryrepo countryrepo;
 
-    @GetMapping("/getQuoteByAuthor")
-    public Object getQuoteWithAuthor(@RequestParam("author") String author) {
+    @GetMapping("/author")
+    public AllQuotes getQuoteWithAuthor(@RequestParam("author") String author) {
 
             return quoteService.getQuoteWithAuthor(author);
     }
 
-    @GetMapping("/getRandomQuote")
+    @GetMapping("/quote")
     public List<AllQuotes> getRandom() {
         return quoteService.getRandomQuotes();
     }
 
-    @GetMapping("/getQuoteByCountry")
-    public Object getByCountry(@RequestParam("country") String country) {
+    @GetMapping("/country")
+    public AllQuotes getByCountry(@RequestParam("country") String country) {
             return quoteByCountryService.giveQuoteByCountry(country);
 
     }
 
-    @GetMapping("/getQuoteByBrowser")
-    public Object getByBrowser(@RequestHeader(value = "User-Agent") String userAgent) {
+    @GetMapping("/browser")
+    public AllQuotes getByBrowser(@RequestHeader(value = "User-Agent") String userAgent) {
 
             String browser = Helper.browser_name(userAgent);
             return quoteByBrowser.giveQuoteByBrowser(browser);
-
     }
 
-    @GetMapping("/getAgg")
-    public Object getAgg(@RequestHeader(value = "User-Agent") String userAgent, @RequestParam Map<String,String> aggre) {
+    @GetMapping("/aggregate")
+    public Optional<AllQuotes> getAgg(@RequestHeader(value = "User-Agent") String userAgent, @RequestParam Map<String,String> aggre) {
         return quoteByAggregate.agg( userAgent, aggre);
     }
 
