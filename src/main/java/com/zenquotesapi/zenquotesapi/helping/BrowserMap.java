@@ -2,7 +2,7 @@ package com.zenquotesapi.zenquotesapi.helping;
 import java.util.HashMap;
 public class BrowserMap {
     public BrowserMap() {
-        putBrowserMap("PostmanRuntime/7.29.2","postman");
+        putBrowserMap("PostmanRuntime/7.30.0","postman");
         putBrowserMap("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36","chrome");
     }
     HashMap <String,String> browserMap= new HashMap<>();
