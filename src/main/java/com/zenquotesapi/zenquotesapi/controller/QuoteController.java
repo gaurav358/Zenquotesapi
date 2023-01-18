@@ -1,6 +1,7 @@
 package com.zenquotesapi.zenquotesapi.controller;
 
-import com.zenquotesapi.zenquotesapi.helping.Helper;
+import com.zenquotesapi.zenquotesapi.helping.Browser;
+import com.zenquotesapi.zenquotesapi.helping.BrowserMap;
 import com.zenquotesapi.zenquotesapi.models.AllQuotes;
 import com.zenquotesapi.zenquotesapi.repo.Countryrepo;
 import com.zenquotesapi.zenquotesapi.repo.Quotes;
@@ -9,6 +10,8 @@ import com.zenquotesapi.zenquotesapi.serviceInterface.QuoteByBrowser;
 import com.zenquotesapi.zenquotesapi.serviceInterface.QuoteByCountry;
 import com.zenquotesapi.zenquotesapi.serviceInterface.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,8 +33,8 @@ public class QuoteController {
     private QuoteByCountry quoteByCountryService;
     @Autowired
     private QuoteByBrowser quoteByBrowser;
-    @Autowired
-    private Countryrepo countryrepo;
+@Autowired
+    private BrowserMap browserMap;
 
     @GetMapping("/author")
     public AllQuotes getQuoteWithAuthor(@RequestParam("author") String author) {
@@ -52,14 +55,19 @@ public class QuoteController {
 
     @GetMapping("/browser")
     public AllQuotes getByBrowser(@RequestHeader(value = "User-Agent") String userAgent) {
-
-            String browser = Helper.browser_name(userAgent);
+            String browser = "postman";
+             browser = browserMap.getAgent(userAgent);
             return quoteByBrowser.giveQuoteByBrowser(browser);
     }
+
 
     @GetMapping("/aggregate")
     public Optional<AllQuotes> getAgg(@RequestHeader(value = "User-Agent") String userAgent, @RequestParam Map<String,String> aggre) {
         return quoteByAggregate.agg( userAgent, aggre);
+    }
+    @GetMapping("/")
+    public String getAgg() {
+        return "zenquotes api ";
     }
 
 }

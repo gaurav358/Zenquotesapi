@@ -1,21 +1,34 @@
 package com.zenquotesapi.zenquotesapi.helping;
+
+//import com.zenquotesapi.zenquotesapi.spring.MethodBean;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
-public class BrowserMap {
-    public BrowserMap() {
-        putBrowserMap("PostmanRuntime/7.30.0","postman");
-        putBrowserMap("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36","chrome");
+
+@Service
+public class BrowserMap  {
+
+    private final Browser browser;
+    public BrowserMap(Browser browser)
+    {
+        this.browser = browser;
+        fill();
     }
-    HashMap <String,String> browserMap= new HashMap<>();
+    HashMap<String, String> brows = new HashMap<>();
+    public void  fill () {
+        brows.put("postman", browser.getPostman());
+        brows.put("mozilla", browser.getMozilla());
+    }
 
-public String getBrowserMap(String userAgent)
-{
-return browserMap.get(userAgent);
-}
+    public String getAgent(String agent) {
+        String abc = "default";
+        for (HashMap.Entry<String,String> set: brows.entrySet()){
+            System.out.println(set.getValue());
+            if(set.getValue().equals(agent))
 
-void putBrowserMap(String userAgent, String browser){
-    browserMap.put(userAgent, browser);
-
-}
-
+                return set.getKey();
+        }
+        return abc;
+    }
 }
 

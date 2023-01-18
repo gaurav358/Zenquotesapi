@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ZenquotesapiApplication {
 
 	public static void main(String[] args) {
-		BrowserMap brows = new BrowserMap();
+
 		SpringApplication.run(ZenquotesapiApplication.class, args);
 	}
 

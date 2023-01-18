@@ -1,5 +1,6 @@
 package com.zenquotesapi.zenquotesapi.serviceImpl;
 
+import com.zenquotesapi.zenquotesapi.helping.BrowserMap;
 import com.zenquotesapi.zenquotesapi.helping.Helper;
 import com.zenquotesapi.zenquotesapi.models.AllQuotes;
 import com.zenquotesapi.zenquotesapi.models.BrowserMapping;
@@ -22,7 +23,8 @@ public class QuoteByAggregateImpl implements QuoteByAggregate {
 
     @Autowired
     private Browserrepo browserrepo;
-
+@Autowired
+    private BrowserMap browserMap;
     @Override
     public Optional<AllQuotes> agg(String userAgent, Map<String,String> aggre) {
 
@@ -54,7 +56,7 @@ public class QuoteByAggregateImpl implements QuoteByAggregate {
             List<Integer> ids = new ArrayList<>();
 
             List<String> authorList = new ArrayList<>();
-            String browserName = Helper.browser_name(userAgent);
+            String browserName = browserMap.getAgent(userAgent);
             List<BrowserMapping> browserdata = browserrepo.getByBrowser(browserName);
             for (BrowserMapping triii : browserdata) {
                 authorList = triii.getAuthor();
