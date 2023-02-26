@@ -42,6 +42,7 @@ public class QuoteController {
             return quoteService.getQuoteWithAuthor(author);
     }
 
+
     @GetMapping("/quote")
     public List<AllQuotes> getRandom() {
         return quoteService.getRandomQuotes();
