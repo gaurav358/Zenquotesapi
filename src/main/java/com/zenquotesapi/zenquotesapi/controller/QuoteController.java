@@ -33,43 +33,58 @@ public class QuoteController {
     private QuoteByCountry quoteByCountryService;
     @Autowired
     private QuoteByBrowser quoteByBrowser;
-@Autowired
+    @Autowired
     private BrowserMap browserMap;
 
     @GetMapping("/author")
-    public AllQuotes getQuoteWithAuthor(@RequestParam("author") String author) {
+    public AllQuotes getQuoteWithAuthor(@RequestParam("author") String author)
+    {
 
-            return quoteService.getQuoteWithAuthor(author);
+        return quoteService.getQuoteWithAuthor(author);
+    }
+    @GetMapping("/try")
+    public Integer getQuoteWithAuthor()
+    {
+        int a = 19;
+        System.out.println(a);
+        return a;
     }
 
 
     @GetMapping("/quote")
-    public List<AllQuotes> getRandom() {
+    public List<AllQuotes> getRandom()
+    {
         return quoteService.getRandomQuotes();
     }
 
     @GetMapping("/country")
-    public AllQuotes getByCountry(@RequestParam("country") String country) {
-            return quoteByCountryService.giveQuoteByCountry(country);
+    public AllQuotes getByCountry(@RequestParam("country") String country)
+    {
+        return quoteByCountryService.giveQuoteByCountry(country);
 
     }
 
     @GetMapping("/browser")
-    public AllQuotes getByBrowser(@RequestHeader(value = "User-Agent") String userAgent) {
-            String browser = "postman";
-             browser = browserMap.getAgent(userAgent);
-            return quoteByBrowser.giveQuoteByBrowser(browser);
+    public AllQuotes getByBrowser(@RequestHeader(value = "User-Agent") String userAgent)
+    {
+        String browser = "postman";
+        browser = browserMap.getAgent(userAgent);
+        return quoteByBrowser.giveQuoteByBrowser(browser);
     }
 
 
     @GetMapping("/aggregate")
-    public Optional<AllQuotes> getAgg(@RequestHeader(value = "User-Agent") String userAgent, @RequestParam Map<String,String> aggre) {
-        return quoteByAggregate.agg( userAgent, aggre);
+    public Optional<AllQuotes> getAgg(@RequestHeader(value = "User-Agent") String userAgent, @RequestParam Map<String, String> aggre)
+    {
+        return quoteByAggregate.agg(userAgent, aggre);
     }
+
     @GetMapping("/")
-    public String getAgg() {
+    public String getAgg()
+    {
         return "zenquotes api ";
     }
 
 }
 
+//try 7
