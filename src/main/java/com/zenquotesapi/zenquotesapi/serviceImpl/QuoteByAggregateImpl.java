@@ -1,7 +1,6 @@
 package com.zenquotesapi.zenquotesapi.serviceImpl;
 
 import com.zenquotesapi.zenquotesapi.helping.BrowserMap;
-import com.zenquotesapi.zenquotesapi.helping.Helper;
 import com.zenquotesapi.zenquotesapi.models.AllQuotes;
 import com.zenquotesapi.zenquotesapi.models.BrowserMapping;
 import com.zenquotesapi.zenquotesapi.models.CountryMapping;

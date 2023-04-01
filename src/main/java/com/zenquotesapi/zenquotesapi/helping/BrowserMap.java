@@ -21,7 +21,7 @@ public class BrowserMap  {
     }
 
     public String getAgent(String agent) {
-        String abc = "default";
+        String abc = "postman";
         for (HashMap.Entry<String,String> set: brows.entrySet()){
             if(set.getValue().equals(agent))
 
